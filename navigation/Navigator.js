@@ -3,9 +3,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons'; 
 
-import ChatScreen from '../screens/ChatScreen';
+import ChatListScreen from '../screens/ChatListScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ChatSettingsScreen from '../screens/ChatSettingsScreen';
+import ChatScreen from "../screens/ChatScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -14,7 +15,7 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator
     screenOptions={{ headerTitle: ''}}>
-      <Tab.Screen name="Chat" component={ChatScreen} options={{
+      <Tab.Screen name="ChatList" component={ChatListScreen} options={{
         tabBarLabel: 'Conversas',
         tabBarIcon: ({color, size}) => {
           return <Ionicons name="ios-chatbubbles-outline" size={size} color={color} />
@@ -39,6 +40,9 @@ const Navigator = (props) => {
                 headerShown: false
             }
         } />
+        <Stack.Screen name="Chat" component={ChatScreen} options={{
+            headerTitle: ""
+        }}/>
         <Stack.Screen name="ChatSettings" component={ChatSettingsScreen} options={
             {
                 headerTitle: "Configurações do Chat",
