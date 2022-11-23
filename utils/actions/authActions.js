@@ -96,15 +96,14 @@ export const userLogout = () => {
   }
 }
 
-export const updateSignedInUserData = async (userId, newData) => {
-  console.log(newData)
+export const updateSignedInUserData = async (userID, newData) => {
   if (newData.nome && newData.sobrenome) {
     const nomeCompleto = `${newData.nome} ${newData.sobrenome}`.toLowerCase()
     newData.nomeCompleto = nomeCompleto
   }
 
   const dbRef = ref(getDatabase())
-  const childRef = child(dbRef, `users/${userId}`)
+  const childRef = child(dbRef, `users/${userID}`)
   await update(childRef, newData)
 }
 
@@ -125,12 +124,12 @@ const createUser = async (nome, sobrenome, email, userID) => {
   return userData
 }
 
-const saveDataToStorage = (token, userId, expireDate) => {
+const saveDataToStorage = (token, userID, expireDate) => {
   AsyncStorage.setItem(
     'userData',
     JSON.stringify({
       token,
-      userId,
+      userID,
       expireDate: expireDate.toISOString(),
     }),
   )

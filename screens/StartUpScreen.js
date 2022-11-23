@@ -19,16 +19,16 @@ const StartUpScreen = () => {
       }
 
       const parsedData = JSON.parse(storedAuthInfo)
-      const { token, userId, expireDate: expireDateString } = parsedData
+      const { token, userID, expireDate: expireDateString } = parsedData
 
       const expireDate = new Date(expireDateString)
 
-      if (expireDate <= new Date() || !token || !userId) {
+      if (expireDate <= new Date() || !token || !userID) {
         dispatch(autoLogin())
         return
       }
 
-      const userData = await getUserData(userId)
+      const userData = await getUserData(userID)
       dispatch(authenticate({ token: token, userData }))
     }
 
